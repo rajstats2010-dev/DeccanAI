@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Catalyst Agent: AI-Powered Skill Assessment & Learning Roadmap
 
-## Getting Started
+**Catalyst Agent** is an advanced AI career companion built for the Catalyst Hackathon. It moves beyond static resumes by using a stateful **LangGraph** workflow to conversationally validate a candidate's skills against a Job Description, identifying real proficiency gaps and generating a personalized learning roadmap.
 
-First, run the development server:
+## 🚀 Key Features
+- **Stateful Skill Validation**: Uses a Python-based **LangGraph** engine to manage complex multi-step reasoning.
+- **Conversational Verification**: A dynamic chat interface that asks technical questions to verify the depth of a candidate's experience.
+- **Automated Gap Analysis**: Compares JD requirements against Resume skills to find "Hard Gaps" (missing) and "Soft Gaps" (unverified).
+- **Dynamic Roadmaps**: Generates a week-by-week learning plan with curated YouTube/Course resources.
+- **Llama 3.3 Intelligence**: Powered by **Llama 3.3 (70B)** via Groq for sub-second, high-reasoning logic.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🛠️ Tech Stack
+- **Frontend**: Next.js 15 (React, Tailwind, Framer Motion)
+- **Backend**: FastAPI (Python)
+- **AI Orchestration**: LangGraph & LangChain
+- **LLM**: Llama 3.3 70B (via Groq LPUs)
+- **PDF Extraction**: PyPDF2 (Python)
+
+---
+
+## ⚙️ Local Setup
+
+To run this project, you will need to start both the **Backend** and the **Frontend** servers.
+
+### 1. Environment Variables
+You need a **Groq API Key** (available at [console.groq.com](https://console.groq.com)).
+
+Create a `.env` file in the `backend/` directory:
+```env
+GROQ_API_KEY=your_gsk_key_here
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Start the Backend (Python)
+```bash
+cd backend
+pip install -r requirements.txt
+python main.py
+```
+*Server will be running at `http://localhost:8000`*
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Start the Frontend (Next.js)
+Open a new terminal:
+```bash
+# In the root directory
+npm install
+npm run dev
+```
+*UI will be available at `http://localhost:3000`*
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🏗️ Architecture & Logic
+The agent follows a multi-node workflow:
 
-To learn more about Next.js, take a look at the following resources:
+```mermaid
+graph TD
+    A[User Inputs Resume & JD] --> B(Extraction Node)
+    B -->|Structured Skills| C(Analysis Node)
+    C -->|Gap Analysis| D{Classification}
+    D -->|Matched| F[Ready for Roadmap]
+    D -->|Hard Gaps| F
+    D -->|Soft Gaps/Verify| E(Interview Node)
+    E -->|Scenario-based Q&A| F
+    F --> G(Roadmap Node)
+    G --> H[Final Learning Plan & Proficiency Scores]
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 🧠 Scoring & Logic Workflow
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Skill Classification Logic**
+   We use LLMs to categorize skills into three buckets:
+   - **Matched**: High confidence skills explicitly backed by project descriptions or years of experience.
+   - **Gaps**: Essential Job Description (JD) requirements missing from the resume.
+   - **Verify**: Mentioned skills that lack context (e.g., "Python" mentioned in skills but no Python projects listed).
 
-## Deploy on Vercel
+2. **Conversational Verification**
+   Instead of a simple "yes/no", the agent generates **scenario-based questions**. 
+   *Example:* If a candidate claims "React Query", the agent might ask: *"How would you handle a race condition where multiple components trigger the same query on mount?"*
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Proficiency Calculation**
+   The Proficiency Score (0-100) is calculated based on:
+   - **Original Context**: How prominently the skill features in the resume.
+   - **Interview Response**: The technical depth and correctness of the user's answer during the chat phase.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Roadmap Generation**
+   The "Adjacent Skills" logic identifies technologies that are naturally related to the candidate's existing stack but required for the target role, ensuring the learning path is **realistic and achievable**.
+
+## 🎥 Submission Details
+- **Demo Video**: [[Insert Link Here](https://drive.google.com/file/d/1XS4ZpKBSaF_IRHCtpo6l2ztEObHszUyv/view?usp=drive_link)]
+- **Project URL**: [Insert Deployed URL Here]
+- **GitHub**: [(https://github.com/rajstats2010-dev/DeccanAI)]
+
+---
+Built for the **Catalyst Hackathon** by **Raju Kommarajula**.
