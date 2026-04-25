@@ -98,8 +98,8 @@ To demonstrate the Catalyst Agent's capabilities, we have included sample data:
 *(You can test this by uploading your own PDF and JD into the interface!)*
 
 ## 🎥 Submission Details
-- **Demo Video**: [[Insert Link Here](https://drive.google.com/file/d/1XS4ZpKBSaF_IRHCtpo6l2ztEObHszUyv/view?usp=drive_link)]
-- **Project URL**: [Insert Deployed URL Here]
+- **Demo Video**: [[Watch Demo Video](https://drive.google.com/file/d/1XS4ZpKBSaF_IRHCtpo6l2ztEObHszUyv/view?usp=drive_link)]
+- **Project URL**: [Local Setup Only / Insert Deployed URL Here]
 - **GitHub**: [(https://github.com/rajstats2010-dev/DeccanAI)]
 
 ---
