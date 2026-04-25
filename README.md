@@ -85,6 +85,18 @@ graph TD
 4. **Roadmap Generation**
    The "Adjacent Skills" logic identifies technologies that are naturally related to the candidate's existing stack but required for the target role, ensuring the learning path is **realistic and achievable**.
 
+## 📊 Sample Inputs and Outputs
+
+To demonstrate the Catalyst Agent's capabilities, we have included sample data:
+- **Sample Input (Resume)**: A standard Frontend Developer resume claiming React and Node.js skills.
+- **Sample Input (JD)**: A Full Stack Developer role requiring React, Node.js, and GraphQL.
+- **Sample Output**: The agent's generated JSON response showing:
+  - `Matched Skills`: React, Node.js
+  - `Gaps`: GraphQL
+  - `Generated Roadmap`: A 4-week personalized plan focusing heavily on GraphQL and integrating it with their existing Node.js knowledge, complete with YouTube links and documentation.
+
+*(You can test this by uploading your own PDF and JD into the interface!)*
+
 ## 🎥 Submission Details
 - **Demo Video**: [[Insert Link Here](https://drive.google.com/file/d/1XS4ZpKBSaF_IRHCtpo6l2ztEObHszUyv/view?usp=drive_link)]
 - **Project URL**: [Insert Deployed URL Here]
